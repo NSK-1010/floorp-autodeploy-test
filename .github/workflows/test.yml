@@ -35,8 +35,8 @@ jobs:
         rm push.bash
         rm .SRCINFO
         useradd test
-        su -c 'makepkg --printsrcinfo > /tmp/.SRCINFO' test
-        mv /tmp/.SRCINFO .SRCINFO
+        chmod -R 777 ./
+        su -c 'makepkg --printsrcinfo > .SRCINFO' test
         git add -A
         git commit -m "v$(cat PKGBUILD | grep 'pkgver=' | sed s/pkgver=//)-$(cat PKGBUILD | grep 'pkgrel=' | sed s/pkgrel=//)"
         git push origin main
