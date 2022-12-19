@@ -32,5 +32,5 @@ jobs:
         bash push.bash
         makepkg --printsrcinfo > .SRCINFO
         git add -A
-        git commit -m "$(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].tag_name' | sed s/\"//g)"
+        git commit -m "v$(cat PKGBUILD | grep 'pkgver=' | sed s/pkgver=//)-$(cat PKGBUILD | grep 'pkgrel=' | sed s/pkgrel=//)"
         git push origin master
