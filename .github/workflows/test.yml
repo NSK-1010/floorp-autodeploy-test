@@ -30,7 +30,8 @@ jobs:
         git config --global user.email "${GIT_EMAIL}"
         git clone git clone ssh://aur@aur.archlinux.org/floorp.git
         cd floorp
-        git remote set-url origin https://github.com/NSK-1010/floorp-autodeploy-test.git
+        git remote rm origin
+        git remote add origin https://github.com/NSK-1010/test_repo.git
         bash push.bash
         makepkg --printsrcinfo > .SRCINFO
         git add -A
