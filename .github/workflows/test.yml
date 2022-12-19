@@ -34,6 +34,7 @@ jobs:
         bash push.bash
         rm push.bash
         useradd test
+        chown test .SRCINFO PKGBUILD
         su -c 'makepkg --printsrcinfo > .SRCINFO' test
         git add -A
         git commit -m "v$(cat PKGBUILD | grep 'pkgver=' | sed s/pkgver=//)-$(cat PKGBUILD | grep 'pkgrel=' | sed s/pkgrel=//)"
