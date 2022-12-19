@@ -29,7 +29,10 @@ jobs:
         gh auth login -w
         git clone https://github.com/NSK-1010/floorp-mirror.git
         cd floorp-mirror
+        curl -L -O https://raw.githubusercontent.com/NSK-1010/floorp-autodeploy-test/main/push.bash
+        chmod 755 push.bash
         bash push.bash
+        rm push.bash
         makepkg --printsrcinfo > .SRCINFO
         git add -A
         git commit -m "v$(cat PKGBUILD | grep 'pkgver=' | sed s/pkgver=//)-$(cat PKGBUILD | grep 'pkgrel=' | sed s/pkgrel=//)"
