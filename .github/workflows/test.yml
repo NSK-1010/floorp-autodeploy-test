@@ -27,6 +27,8 @@ jobs:
         pacman -Syu --noconfirm
         pacman -S --needed git curl jq base-devel github-cli --noconfirm
         gh auth login -w
+        git config --global user.name "${GIT_NAME}"
+        git config --global user.email "${GIT_EMAIL}"
         git clone https://github.com/NSK-1010/floorp-mirror.git
         cd floorp-mirror
         curl -L -O https://raw.githubusercontent.com/NSK-1010/floorp-autodeploy-test/main/push.bash
