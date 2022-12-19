@@ -24,7 +24,7 @@ jobs:
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: Make PKGBUILD and .SRCINFO
       run: |
-        pacman -S --needed git curl jq base-devel
+        pacman -S --needed git curl jq base-devel --noconfirm
         git config --global user.name "${{ GIT_NAME }}"
         git config --global user.email "${{ GIT_EMAIL }}"
         git clone ssh://aur@aur.archlinux.org/floorp.git
