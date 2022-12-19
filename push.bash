@@ -2,7 +2,7 @@ cat <<EOF > PKGBUILD
 # Maintainer: NSK-1010 <kotone[dot]olin1010[at]gmail[dot]com>
 pkgname=floorp
 pkgver=$(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].tag_name' | sed s/\"v//g | sed s/\"//g)
-pkgrel=$(if [ $(curl "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=floorp" | grep 'pkgver=' | sed s/pkgver=//) = $(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].tag_name' | sed s/\"v//g | sed s/\"//g)];then $(($(curl "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=floorp" | grep 'pkgrel=' | sed s/pkgrel=//) + 1)));else echo 1;fi)
+pkgrel=$(if [ $(curl "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=floorp" | grep 'pkgver=' | sed s/pkgver=//) = $(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].tag_name' | sed s/\"v//g | sed s/\"//g) ];then echo $(($(curl "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=floorp" | grep 'pkgrel=' | sed s/pkgrel=//) + 1));else echo 1;fi)
 pkgdesc="Firefox-based browser with excellent privacy protection, developed by a community of students in Japan"
 url="http://floorp.ablaze.one"
 arch=('x86_64' 'aarch64')
