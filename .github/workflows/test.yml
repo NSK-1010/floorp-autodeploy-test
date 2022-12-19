@@ -24,6 +24,7 @@ jobs:
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: Make PKGBUILD and .SRCINFO
       run: |
+        pacman -Syu --noconfirm
         pacman -S --needed git curl jq base-devel --noconfirm
         git config --global user.name "${GIT_NAME}"
         git config --global user.email "${GIT_EMAIL}"
