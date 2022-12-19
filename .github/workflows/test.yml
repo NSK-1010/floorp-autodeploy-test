@@ -33,9 +33,10 @@ jobs:
         chmod 755 push.bash
         bash push.bash
         rm push.bash
+        rm .SRCINFO
         useradd test
-        chown test .SRCINFO PKGBUILD
-        su -c 'makepkg --printsrcinfo > .SRCINFO' test
+        su -c 'makepkg --printsrcinfo > /tmp/.SRCINFO' test
+        mv /tmp/.SRCINFO .SRCINFO
         git add -A
         git commit -m "v$(cat PKGBUILD | grep 'pkgver=' | sed s/pkgver=//)-$(cat PKGBUILD | grep 'pkgrel=' | sed s/pkgrel=//)"
         git push origin main
