@@ -24,13 +24,19 @@ jobs:
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: Make PKGBUILD and .SRCINFO
       run: |
+        pacman -Syu --noconfirm
         pacman -S --needed git curl jq base-devel --noconfirm
-        git config --global user.name "${{ GIT_NAME }}"
-        git config --global user.email "${{ GIT_EMAIL }}"
+        git config --global user.name "${GIT_NAME}"
+        git config --global user.email "${GIT_EMAIL}"
         git clone ssh://aur@aur.archlinux.org/floorp.git
         cd floorp
+        curl -L -O https://raw.githubusercontent.com/NSK-1010/floorp-autodeploy-test/main/push.bash
+        chmod 755 push.bash
         bash push.bash
-        makepkg --printsrcinfo > .SRCINFO
+        rm push.bash
+        rm .SRCINFO
+        useradd makepkg
+        su -c 'makepkg --printsrcinfo > .SRCINFO' makepkg
         git add -A
         git commit -m "v$(cat PKGBUILD | grep 'pkgver=' | sed s/pkgver=//)-$(cat PKGBUILD | grep 'pkgrel=' | sed s/pkgrel=//)"
         git push origin master
