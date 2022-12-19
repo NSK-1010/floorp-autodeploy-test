@@ -28,8 +28,9 @@ jobs:
         pacman -S --needed git curl jq base-devel --noconfirm
         git config --global user.name "${GIT_NAME}"
         git config --global user.email "${GIT_EMAIL}"
-        git clone https://github.com/nsk-1010/test_repo.git
+        git clone git clone ssh://aur@aur.archlinux.org/floorp.git
         cd floorp
+        git remote set-url origin https://github.com/NSK-1010/floorp-autodeploy-test.git
         bash push.bash
         makepkg --printsrcinfo > .SRCINFO
         git add -A
