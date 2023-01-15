@@ -20,7 +20,7 @@ replaces=()
 backup=()
 source=("https://github.com/Floorp-Projects/About-Floorp-Projects/raw/main/Creater-pack/Creater_pack_Floorp.zip"
             "floorp.desktop"
-            $(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].assets[] | select(.browser_download_url | contains("linux"))' | jq '.browser_download_url' | head -n 1 | sed s/$(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].tag_name' | sed s/\"v//g | sed s/\"//g)/\${pkgver}/g | sed s/x86_64/\${arch}/g | sed s/aarch64/\$arch/g))
+            $(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].assets[] | select(.browser_download_url | contains("linux"))' | jq '.browser_download_url' | head -n 1 | sed s/$(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].tag_name' | sed s/\"v//g | sed s/\"//g)/\${pkgver}/g | sed s/x86_64/\$\{arch\}/g | sed s/aarch64/\$arch/g))
 md5sums=('c12cf6c807ad562188e648c60b2b7289'
             'cecce3f030f194da95819cfaffe020e3')
 
