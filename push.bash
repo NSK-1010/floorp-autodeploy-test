@@ -25,9 +25,9 @@ md5sums=('c12cf6c807ad562188e648c60b2b7289'
             'cecce3f030f194da95819cfaffe020e3')
 
 if test "\$CARCH" == x86_64; then
-    md5sums+=('$(curl -L -C $(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].assets[] | select(.browser_download_url | contains("linux"))' | jq '.browser_download_url' | head -n 1 | sed s/aarch64/x86_64/g) | md5sum -b - | sed "s/ \*\-//g")')
+    md5sums+=('$(curl -L $(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].assets[] | select(.browser_download_url | contains("linux"))' | jq '.browser_download_url' | head -n 1 | sed s/aarch64/x86_64/g) | md5sum -b - | sed "s/ \*\-//g")')
 elif test "\$CARCH" == aarch64; then
-    md5sums+=('$(curl -L -C $(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].assets[] | select(.browser_download_url | contains("linux"))' | jq '.browser_download_url' | head -n 1 | sed s/x86_64/aarch64/g) | md5sum -b - | sed "s/ \*\-//g")')
+    md5sums+=('$(curl -L $(curl https://api.github.com/repos/Floorp-Projects/Floorp/releases | jq '.[0].assets[] | select(.browser_download_url | contains("linux"))' | jq '.browser_download_url' | head -n 1 | sed s/x86_64/aarch64/g) | md5sum -b - | sed "s/ \*\-//g")')
 fi
 
 package() {
